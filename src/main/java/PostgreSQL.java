@@ -1,17 +1,17 @@
-import test.InsertTest;
+import test.Tests;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
+import java.util.Properties;
 
 public class PostgreSQL {
-    public static void main(String[] args) {
-        if(args.length < 5) {
+    public static void main(String[] args) throws Exception {
+        if(args.length < 6) {
             System.out.println("Insufficient arguments passed. You need to pass: ");
             System.out.println("1) host");
             System.out.println("2) port");
             System.out.println("3) database");
             System.out.println("4) username");
             System.out.println("5) password");
+            System.out.println("6) rows number");
             return;
         }
 
@@ -20,22 +20,15 @@ public class PostgreSQL {
         String database = args[2];
         String username = args[3];
         String password = args[4];
+        int rowsNumber = Integer.parseInt(args[5]);
 
-        try(Connection connection = DriverManager.getConnection(
-                            "jdbc:postgresql://" + host + ":" + port + "/" + database,
-                            username,
-                            password)) {
-            if(connection == null) {
-                System.out.println("error");
-                return;
-            }
+        Properties properties = new Properties();
+        properties.setProperty("user", username);
+        properties.setProperty("password", password);
 
-            System.out.println("Connection established");
-
-            System.out.println("Insert test time in milliseconds: " + new InsertTest(connection).test());
-
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
+        Tests tests = new Tests("jdbc:postgresql://" + host + ":" + port + "/" + database,
+                properties,
+                rowsNumber);
+        tests.run();
     }
 }
