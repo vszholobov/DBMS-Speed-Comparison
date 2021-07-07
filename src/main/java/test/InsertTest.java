@@ -1,3 +1,5 @@
+package test;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -21,7 +23,7 @@ public final class InsertTest implements Test {
             char c = 'a';
             double d = 1.0;
             long startTime = System.nanoTime();
-            for(int i = 0; i < 100; i++) {
+            for(int i = 0; i < 25000; i++) {
                 insertStatement.setInt(1, i);
                 insertStatement.setString(2, String.valueOf(c));
                 insertStatement.setDouble(3, d);

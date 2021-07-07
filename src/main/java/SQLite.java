@@ -1,10 +1,11 @@
+import test.InsertTest;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class SQLite {
     public static void main(String[] args) {
-        try(Connection connection = DriverManager.getConnection(
-                "url")) {
+        try(Connection connection = DriverManager.getConnection("url")) {
             if(connection == null) {
                 System.out.println("error");
                 return;

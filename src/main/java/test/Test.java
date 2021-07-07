@@ -1,4 +1,4 @@
-import java.sql.SQLException;
+package test;
 
 public interface Test {
     long test() throws Exception;
